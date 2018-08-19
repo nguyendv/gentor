@@ -4,6 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+mistletoe = "*"
+"jinja2" = "*"
 
 [dev-packages]
 
