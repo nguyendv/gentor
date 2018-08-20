@@ -40,10 +40,15 @@ content/posts/post2.md
 
 Markdown files named `_index.md` is our convention for the index page of a directory.
 
-### Headers in Markdown files
-The header section of each Markdown file allows you to specify the template file. Template files can be found and editted in the `template` directory. All the headers are required at this moment (better default settings will be added in the future).
+### Frontmatter in Markdown files
+The frontmatter section of each Markdown file allows you to specify the template file. Template files can be found and editted in the `template` directory. All the keys are required at this moment (better default settings will be added in the future). The frontmatter uses YAML syntax.
 
 ```
+---
+draft: True
+title: Page title
+template: base.html
+---
 
 ```
 
