@@ -1,2 +1,4 @@
 .venv
 dvnguyen.com.sublime-workspace
+*__pycache__
+*.pytest_cache

@@ -6,8 +6,10 @@ name = "pypi"
 [packages]
 mistletoe = "*"
 "jinja2" = "*"
+python-frontmatter = "*"
 
 [dev-packages]
+pytest = "*"
 
 [requires]
 python_version = "3.7"

@@ -41,9 +41,16 @@ content/posts/post2.md
 Markdown files named `_index.md` is our convention for the index page of a directory.
 
 ### Headers in Markdown files
-The header section of each Markdown file allows you to specify the template file. Template files can be found and editted in the `template` directory.
+The header section of each Markdown file allows you to specify the template file. Template files can be found and editted in the `template` directory. All the headers are required at this moment (better default settings will be added in the future).
+
+```
+
+```
 
 # Technical Decisions
 This section lists our technical decisions for the site generator.
 
-The project use `jinja2` for html template, and `mistletoe` for rendering Markdown content.
+## Dependencies
+- `jinja2` for html template
+- `mistletoe` for rendering Markdown content.
+- `python-frontmatter` for parsing YAML frontmatter from a Markdown file

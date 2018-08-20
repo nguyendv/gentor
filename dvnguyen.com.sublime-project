@@ -5,7 +5,7 @@
 			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
 			"name": "Anaconda Python Builder",
 			"selector": "source.python",
-			"shell_cmd": "\"python\" -u \"$file\""
+			"shell_cmd": "\".venv/bin/python3.7\" -u \"$file\""
 		}
 	],
 	"folders":
@@ -16,9 +16,18 @@
 	],
 	"settings":
 	{
-		"anaconda_linting": true,
+		"anaconda_linting": true /* Anacoda uses Pyflakes */,
 		"anaconda_linting_behaviour": "always",
 		"python_interpreter": ".venv/bin/python3.7",
-		"validate_imports": true
+		"validate_imports": true,
+		"pep257": true /* enable the pep257 in the linter */,
+		"pep257_ignore": 
+		[	
+			"D213"
+		],
+		"pep8_ignore":
+		[
+			"E501"
+		]
 	}
 }
