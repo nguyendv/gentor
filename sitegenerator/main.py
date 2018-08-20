@@ -1,6 +1,7 @@
 """cli.py: command line interface for working with content."""
 
 import re
+from pathlib import Path
 import click
 from jinja2 import FileSystemLoader, Environment, select_autoescape
 
@@ -13,6 +14,15 @@ def write_html(md_file, template_file, context):
     """Build build a markdown content file to html, and write down."""
     template = template_env.get_template(template_file)
     rendered = template.render(context)
+    out_file = calculate_out_path(md_file)
+    with open(out_file, 'w') as f:
+        f.write(rendered)
+
+
+def list_md_files(directory):
+    """Recursively list all .md files of a directory."""
+    p = Path(directory)
+    return [str(path) for path in p.glob('**/*.md')]
 
 
 def calculate_out_path(md_file: str) -> str:

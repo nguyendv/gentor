@@ -3,4 +3,4 @@ build:
 
 test:
 	pip install -e .
-	cd tests && pytest
+	cd tests && pytest -vv
