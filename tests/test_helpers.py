@@ -1,7 +1,7 @@
-"""Test heplers function for sitegenerator.main ."""
+"""Test heplers function for gentor.main ."""
 
-from sitegenerator.main import calculate_out_path
-from sitegenerator.main import list_md_files
+from gentor.main import calculate_out_path
+from gentor.main import list_md_files
 
 
 def test_calculate_out_path():

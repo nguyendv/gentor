@@ -15,7 +15,7 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = 'sitegenerator'
+NAME = 'gentor'
 DESCRIPTION = 'My short description for my project.'
 URL = 'https://github.com/nguyendv/dvnguyen.com'
 EMAIL = 'dv@dvnguyen.com'
@@ -25,7 +25,10 @@ VERSION = None
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    # 'requests', 'maya', 'records',
+    'click~=6.7',
+    'jinja2~=2.10',
+    'markdown~=2.6.11',
+    'python-frontmatter~=0.4.2'
 ]
 
 # What packages are optional?
@@ -110,7 +113,7 @@ setup(
     # py_modules=['mypackage'],
 
     entry_points={
-        'console_scripts': ['sitegenerator=sitegenerator.main:cli'],
+        'console_scripts': ['gentor=gentor.main:cli'],
     },
     install_requires=REQUIRED,
     extras_require=EXTRAS,
