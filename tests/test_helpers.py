@@ -6,7 +6,7 @@ from sitegenerator.main import list_md_files
 
 def test_calculate_out_path():
     """Test calculate_out_path() function."""
-    assert calculate_out_path('content/md/index.md') == 'output/md/index.html'
+    assert calculate_out_path('content/md/index.md') == 'public/md/index.html'
 
 
 def test_list_md_files():
