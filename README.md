@@ -59,3 +59,4 @@ This section lists our technical decisions for the site generator.
 - `jinja2` for html template
 - `mistletoe` for rendering Markdown content.
 - `python-frontmatter` for parsing YAML frontmatter from a Markdown file
+- `click` for handling cli arguments
