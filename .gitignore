@@ -1,4 +1,6 @@
 .venv
+.vscode
+.mypy_cache
 gentor.sublime-workspace
 *__pycache__
 *.pytest_cache
