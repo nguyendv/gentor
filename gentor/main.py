@@ -5,7 +5,6 @@ from shutil import copyfile
 import re
 from pathlib import Path
 import click
-import frontmatter
 import markdown
 from jinja2 import FileSystemLoader, Environment
 
@@ -22,19 +21,44 @@ template_env = Environment(loader=fs_loader)
 CONTENT_DIR = 'content/'
 PUBLIC_DIR = 'public/'
 
+class Error(Exception):
+    """ Base class for exceptions in this module"""
+    pass
 
-def gen_html(md_file):
+class InvalidFrontMatter(Error):
+    """ Exception raised for invalid frontmatter
+
+    Attributes:
+        filename: Input file which contains invalid frontmatter
+        message: explanation of the error
+    """
+
+    def __init__(self, filename, message):
+        self.filename = filename
+        self.message = message
+
+def load_frontmatter(markdown_file):
+    import frontmatter
+    fm = frontmatter.load(markdown_file)
+    if 'template' not in fm:
+        raise InvalidFrontMatter(markdown_file, message='No template key found in frontmatter')
+    elif 'title' not in fm:
+        raise InvalidFrontMatter(markdown_file, message='No title found in frontmatter')
+
+    return fm
+
+def gen_html(markdown_file):
     """Build build a markdown content file to html, and write down."""
-    fm = frontmatter.load(md_file)
-    template = template_env.get_template(fm['template'])
-    content = markdown.markdown(fm.content)
+    frontmatter = load_frontmatter(markdown_file)
+    template = template_env.get_template(frontmatter['template'])
+    content = markdown.markdown(frontmatter.content)
     context = {
-        'title': fm['title'],
+        'title': frontmatter['title'],
         'content': content
     }
 
     rendered = template.render(context)
-    f_out = calculate_out_path(md_file)
+    f_out = calculate_out_path(markdown_file)
     dirname = os.path.dirname(f_out)
     if not os.path.exists(dirname):
         os.makedirs(dirname, exist_ok=True)
@@ -70,8 +94,8 @@ def build():
     """`build` command`."""
     p = Path(CONTENT_DIR)
 
-    md_files = [str(path) for path in p.glob('**/*.md')]
-    for md in md_files:
+    markdown_files = [str(path) for path in p.glob('**/*.md')]
+    for md in markdown_files:
         gen_html(md)
 
     pdf_files = [str(path) for path in p.glob('**/*.pdf')]
