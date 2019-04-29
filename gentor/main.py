@@ -1,6 +1,7 @@
 """cli.py: command line interface for working with content."""
 
 import os
+from shutil import copyfile
 import re
 from pathlib import Path
 import click
@@ -33,24 +34,28 @@ def gen_html(md_file):
     }
 
     rendered = template.render(context)
-    fout = calculate_out_path(md_file)
-    dirname = os.path.dirname(fout)
+    f_out = calculate_out_path(md_file)
+    dirname = os.path.dirname(f_out)
     if not os.path.exists(dirname):
         os.makedirs(dirname, exist_ok=True)
-    with open(fout, 'w') as f:
+    with open(f_out, 'w') as f:
         f.write(rendered)
 
 
-def list_md_files(directory):
-    """Recursively list all .md files of a directory."""
-    p = Path(directory)
-    return [str(path) for path in p.glob('**/*.md')]
+def gen_pdf(pdf_file):
+    """Copy a pdf_file to the public directory"""
+    f_out = calculate_out_path(pdf_file)
+    dirname = os.path.dirname(f_out)
+    if not os.path.exists(dirname):
+        os.makedirs(dirname, exist_ok=True)
+    copyfile(pdf_file, f_out)
 
 
-def calculate_out_path(md_file: str) -> str:
-    """Calculate output public path in `public` directory for a Markdown file from `content`."""
-    out = re.sub('^' + CONTENT_DIR, PUBLIC_DIR, md_file)
-    out = re.sub('.md$', '.html', out)
+def calculate_out_path(content_file: str) -> str:
+    """Calculate output public path in `public` directory for a Markdown or PDF file from `content`."""
+    out = re.sub('^' + CONTENT_DIR, PUBLIC_DIR, content_file)
+    if content_file.endswith('.md'):
+        out = re.sub('.md$', '.html', out)
     return out
 
 
@@ -63,6 +68,12 @@ def cli():
 @cli.command()
 def build():
     """`build` command`."""
-    md_files = list_md_files(CONTENT_DIR)
+    p = Path(CONTENT_DIR)
+
+    md_files = [str(path) for path in p.glob('**/*.md')]
     for md in md_files:
         gen_html(md)
+
+    pdf_files = [str(path) for path in p.glob('**/*.pdf')]
+    for pdf in pdf_files:
+        gen_pdf(pdf)
