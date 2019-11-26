@@ -28,7 +28,7 @@ REQUIRED = [
     'click~=6.7',
     'jinja2~=2.10',
     'markdown>=2.6.11,<3.2.0',
-    'python-frontmatter~=0.4.2'
+    'python-frontmatter>=0.4.2,<0.6.0'
 ]
 
 # What packages are optional?
