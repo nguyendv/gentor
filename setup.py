@@ -27,7 +27,7 @@ VERSION = None
 REQUIRED = [
     'click~=6.7',
     'jinja2~=2.10',
-    'markdown>=2.6.11,<3.2.0',
+    'markdown>=2.6.11,<3.3.0',
     'python-frontmatter~=0.4.2'
 ]
 
