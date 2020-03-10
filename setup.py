@@ -25,7 +25,7 @@ VERSION = None
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    'click~=6.7',
+    'click>=6.7,<8.0',
     'jinja2~=2.10',
     'markdown>=2.6.11,<3.2.0',
     'python-frontmatter~=0.4.2'
